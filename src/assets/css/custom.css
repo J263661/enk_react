@@ -1,4 +1,32 @@
 @layer components {
+  /* -------------------header------------- */
+header {
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.05);
+}
+header.sticky {
+    background: #1c5570;
+}
+.menu-item-inactive {
+    color: #f3f6ff;
+    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: 600;
+}
+aside.fixed {
+    background-color: #1c5570;
+}
+.menu-item-icon-inactive {
+    color: #e8edf7;
+    padding: 5px;
+    background: #2b0f1061;
+    border-radius: 5px;
+}
+@layer utilities {
+  .menu-item-icon-active {
+    @apply p-[5px] bg-[#022342] rounded-[5px] text-[#e8edf7];
+  }
+}
+
   /* --------- Right Section --------- */
   .banner_images {
     border: 16px solid #eaeaea;
@@ -81,7 +109,7 @@ span.input_icon {
     @apply w-100 py-3  text-white rounded-md text-base cursor-pointer mb-5 transition;
     opacity: 0;
     animation: fadeIn 0.5s forwards 2.6s;
-    background-color: #043b55;
+    background-color: #216e92;
   }
   .btn:hover {
     @apply bg-red-600;
