@@ -29,15 +29,15 @@ const networks = [
 const Dashboard: React.FC<DashboardProps> = ({ className }) => {
    return (
     
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4">
+    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 ">
       {networks.map((item, i) => (
         <a
           key={i}
           href={item.link}
           className={`flex items-center justify-center
-            h-full 
+            h-25 
             p-0 m-[8px_0_10px]
-            rounded-[5px_0_0_5px] border border-white border-r-0
+            rounded-[5px_0_0_5px] border  border-r-0
             shadow-[12px_12px_23px_#bac0d2,-3px_-4px_23px_#e8f0ff]
             origin-bottom-right transform-gpu
             transition-all duration-200 ease-in-out
@@ -51,14 +51,17 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
       ))}
 
       {/* Sign-up Button */}
-      <a
+      <div className="butn  w-full flex items-center justify-center text-center">
+        <a
         href="#"
         className="bg-[#3c4c54] text-white text-[16px] border-2 border-[#3c4c54] 
-          rounded-[10px] font-semibold w-full px-6 py-2 text-center
-          transition-all duration-700 ease-in hover:bg-[#2a353a]"
+          rounded-[10px] font-semibold px-6 py-2 
+          transition-all duration-700 ease-in hover:bg-[#2a353a] "
       >
         Click here to Sign up T-Mobile/Ultra Mobile
       </a>
+      </div>
+      
     </div>
   );
 }

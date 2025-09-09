@@ -32,7 +32,7 @@ const SignUp = () => {
        
       </div> */}
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-#f2f7ff">
       <div className="w-1/2  relative banner_images">
          <img src={boom} alt="Boom" className="w-full h-50 object-cover"/>
         <img src={linkup} alt="Linkup" className="w-full h-50 object-cover"/>

@@ -5,18 +5,18 @@ import { useSidebar } from "../components/themes/SidebarContext";
 import { Icon } from '@iconify/react';
 
 export const Icons = {
-  DashboardIcon: <Icon icon="ri:dashboard-line" className="w-5 h-5 me-2" />,
-  BoxCubeIcon: <Icon icon="ri:archive-line" className="w-5 h-5 me-2" />,
-  CalenderIcon: <Icon icon="ri:calendar-line" className="w-5 h-5 me-2" />,
-  ChevronDownIcon: <Icon icon="ri:arrow-down-s-line" className="w-5 h-5 me-2" />,
-  GridIcon: <Icon icon="ri:layout-grid-line" className="w-5 h-5 me-2" />,
-  HorizontaLDots: <Icon icon="ri:more-fill" className="w-5 h-5 me-2" />,
-  ListIcon: <Icon icon="ri:list-unordered" className="w-5 h-5 me-2" />,
-  PageIcon: <Icon icon="ri:file-text-line" className="w-5 h-5 me-2" />,
-  PieChartIcon: <Icon icon="ri:pie-chart-line" className="w-5 h-5 me-2" />,
-  PlugInIcon: <Icon icon="ri:plug-line" className="w-5 h-5 me-2" />,
-  TableIcon: <Icon icon="ri:table-line" className="w-5 h-5 me-2" />,
-  UserCircleIcon: <Icon icon="ri:user-line" className="w-5 h-5 me-2" />,
+  DashboardIcon: <Icon icon="ri:dashboard-line" className="w-4 h-4 " />,
+  BoxCubeIcon: <Icon icon="ri:archive-line" className="w-4 h-4" />,
+  CalenderIcon: <Icon icon="ri:calendar-line" className="w-4 h-4 " />,
+  ChevronDownIcon: <Icon icon="ri:arrow-down-s-line" className="w-4 h-4" />,
+  GridIcon: <Icon icon="ri:layout-grid-line" className="w-4 h-4 " />,
+  HorizontaLDots: <Icon icon="ri:more-fill" className="w-4 h-4 " />,
+  ListIcon: <Icon icon="ri:list-unordered" className="w-4 h-4" />,
+  PageIcon: <Icon icon="ri:file-text-line" className="w-4 h-4 " />,
+  PieChartIcon: <Icon icon="ri:pie-chart-line" className="w-4 h-4 " />,
+  PlugInIcon: <Icon icon="ri:plug-line" className="w-4 h-4 " />,
+  TableIcon: <Icon icon="ri:table-line" className="w-4 h-4 " />,
+  UserCircleIcon: <Icon icon="ri:user-line" className="w-4 h-4 " />,
 };
 
 type NavItem = {
@@ -305,7 +305,7 @@ const AppSidebar: React.FC = () => {
 
  const renderMenuItems = (items: NavItem[], menuRoot: "main" | "others", parentKey: string = menuRoot, level = 1) => {
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-1">
       {items.map((nav, index) => {
         const key = makeKey(parentKey, index);
         const isOpen = !!openKeys[key];
@@ -318,10 +318,10 @@ const AppSidebar: React.FC = () => {
                 onClick={() => toggleKey(key, level, menuRoot)}
                 className={`menu-item group ${isOpen ? "menu-item-active" : "menu-item-inactive"} cursor-pointer ${!isExpanded && !isHovered ? "lg:justify-center" : "lg:justify-start"}`}
               >
-                <span className={`${isOpen ? "menu-item-icon-active" : "menu-item-icon-inactive"}`}>
+                <span className={`${isOpen ? "menu-item-icon-active" : "menu-item-icon-inactive "}`}>
                   {nav.icon}
                 </span>
-                {(isExpanded || isHovered || isMobileOpen) && <span className="menu-item-text">{nav.name}</span>}
+                {(isExpanded || isHovered || isMobileOpen) && <span className="menu-item-text ">{nav.name}</span>}
                 {(isExpanded || isHovered || isMobileOpen) && React.cloneElement(Icons.ChevronDownIcon, {
                   className: `ml-auto w-5 h-5 transition-transform duration-300 ${isOpen ? "rotate-180 text-brand-500" : ""}`,
                 })}
@@ -338,7 +338,7 @@ const AppSidebar: React.FC = () => {
             {/* Dropdown items without animation */}
            {hasChildren && (
                <div
-                  className={`mt-2 overflow-hidden transition-all duration-300 ${
+                  className={`mt-2 overflow-hidden transition-all duration-300 text-white px-5 ${
                     isOpen ? "max-h-[1000px]" : "max-h-0"
                   } ${level > 1 ? "ml-4 border-l border-gray-200 pl-3" : ""}`}
                 >
@@ -381,23 +381,23 @@ const AppSidebar: React.FC = () => {
 };
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0  h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
-        ${isExpanded || isMobileOpen ? "w-[290px]" : isHovered ? "w-[290px]" : "w-[90px]"}
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0  dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
+        ${isExpanded || isMobileOpen ? "w-[250px]" : isHovered ? "w-[250px]" : "w-[90px]"}
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Logo */}
-      <div className={`pt-4 flex ${!isExpanded && !isHovered ? "lg:justify-center" : "justify-start"}`}>
+      <div className={`py-2 mt-2 flex bg-white justify-center rounded-lg ${!isExpanded && !isHovered ? "lg:justify-center" : "justify-center"}`}>
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
-              <img className="dark:hidden" src="../../logo/enk_logo.png" alt="Logo" width={150} height={40} />
-              <img className="hidden dark:block" src="../../logo/enk_logo.png" alt="Logo" width={150} height={40} />
+              <img className="dark:hidden" src="../../logo/enk_logo.png" alt="Logo" width={80} height={40} />
+              <img className="hidden dark:block" src="../../logo/enk_logo.png" alt="Logo" width={80} height={40} />
             </>
           ) : (
-            <img src="../../logo/logo-icon.svg" alt="Logo" width={32} height={32} />
+            <img src="../../logo/enk_logo.png" alt="Logo" width={32} height={32} />
           )}
         </Link>
       </div>
@@ -405,7 +405,7 @@ const AppSidebar: React.FC = () => {
       {/* Nav Items */}
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar mt-5">
         <nav className="mb-6">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <div>
               <h2 className={` text-xs uppercase flex leading-[20px] text-gray-400 ${!isExpanded && !isHovered ? "lg:justify-center" : "justify-start"}`}>
                 {/* {isExpanded || isHovered || isMobileOpen ? "Menu" :'' />} */}

@@ -13,11 +13,11 @@ const Layout = () => {
   const mainContentMargin = isMobileOpen
     ? "ml-0"
     : isExpanded || isHovered
-    ? "lg:ml-[290px]"
+    ? "lg:ml-[250px]"
     : "lg:ml-[90px]";
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex ">
       {/* Sidebar */}
       <AppSidebar />
 
@@ -27,7 +27,7 @@ const Layout = () => {
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin} bg-gray-100 min-h-screen`}
       >
         <AppHeader />
- <div className="p-4 md:p-6 mx-auto max-w-[var(--breakpoint-2xl)] bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-auto transition-colors duration-300">
+ <div className="p-1 md:p-1 mx-auto max-w-[var(--breakpoint-2xl)] bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-auto transition-colors duration-300">
       
         <AppRoutes /> 
       </div>
