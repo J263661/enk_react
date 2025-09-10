@@ -239,7 +239,7 @@
 }
 
 @utility menu-item-icon-inactive {
-  @apply text-[#e8edf7] group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
+  @apply text-[#e8edf7] group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-white;
 }
 
 @utility menu-item-arrow {
@@ -251,7 +251,7 @@
 }
 
 @utility menu-item-arrow-inactive {
-  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
+  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-white;
 }
 
 @utility menu-dropdown-item {
@@ -271,12 +271,12 @@
 }
 @layer utilities {
   .menu-dropdown-item-inactive {
-    @apply hover:bg-gray-100 hover:text-black;
+    @apply hover:bg-[#253b47] hover:text-white;
   }
 }
 @layer utilities {
   .menu-dropdown-item-inactive {
-    @apply hover:bg-gray-100 hover:text-black;
+    @apply hover:bg-[#253b47] hover:text-white;
   }
 
   .menu-dropdown-item-active {

@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Dropdown } from "./Dropdown";
-import { DropdownItem } from "./DropdownItem";
 
 type Notification = {
   id: number;
@@ -46,7 +45,7 @@ export default function NotificationDropdown(): React.ReactElement {
     <div className="relative">
       {/* Bell Button */}
       <button
-        className="relative dropdown-toggle flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-gray-700 h-9 w-9 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+        className="mt-2 mx-2 relative dropdown-toggle flex items-center justify-center text-gray-500 transition-colors bg-gray-200 border border-gray-200 rounded-full hover:text-gray-700 h-5 w-5 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
         onClick={handleClick}
         aria-label="Toggle Notifications"
       >
