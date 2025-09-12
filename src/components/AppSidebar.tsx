@@ -170,7 +170,7 @@ const navItems: NavItem[] = [
     { icon: Icons.PlugInIcon, name: "HELP", path: "/TicketList" },
   ];
 
-const AppSidebar: React.FC = () => {
+const AppSidebar = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const { pathname } = useLocation();
 
@@ -334,17 +334,19 @@ const AppSidebar: React.FC = () => {
   );
 
   return (
-    <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 px-3 left-0 dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen  transition-all duration-300 ease-in-out z-50 border-gray-200
-        ${isExpanded || isMobileOpen ? "w-[250px]" : isHovered ? "w-[250px]" : "w-[90px]"}
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0`}
-      onMouseEnter={() => !isExpanded && setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+  <aside
+  className={`fixed flex flex-col px-3 left-0 dark:bg-gray-900 dark:border-gray-800 text-gray-900
+    transition-all duration-300 ease-in-out z-50 border-gray-200
+    ${isExpanded || isMobileOpen ? "w-[250px]" : isHovered ? "w-[250px]" : "w-[90px]"}
+    ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
+    lg:translate-x-0
+    mt-10 mb-10 h-[calc(100vh-4rem)] lg:mt-0 lg:mb-0 lg:h-screen overflow-y-auto`}
+  onMouseEnter={() => !isExpanded && setIsHovered(true)}
+  onMouseLeave={() => setIsHovered(false)}
+>
       {/* Logo */}
       <div className="py-2 border-b border-gray-600 flex justify-center">
-        <Link to="/" className="flex flex-col items-center  pb-1 ">
+        <Link to="/Dashboard" className="flex flex-col items-center  pb-1 ">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
               <img className="dark:hidden" src="../../logo/enk_logo.png" alt="Logo" width={100} height={40} />
@@ -358,7 +360,7 @@ const AppSidebar: React.FC = () => {
 
       {/* Nav Items */}
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar mt-2">
-        <nav className="mb-4">{renderMenuItems(navItems, "main", "main", 1)}</nav>
+        <nav className="mb-4 ">{renderMenuItems(navItems, "main", "main", 1)}</nav>
 
        <Link
               to="/signin"

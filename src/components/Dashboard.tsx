@@ -1,7 +1,15 @@
 type DashboardProps = {
   className?: string;
 };
-const networks = [
+
+type Networks = {
+  name: string;
+  img: string;
+  link: string;
+  bg: string;
+}
+
+const networks: Networks[] = [
   { name: "LinkUp", img: "../epay-logo/LinkUp_logo.png", link: "/linkup", bg: "bg-linkup" },
   { name: "Surf", img: "../epay-logo/Surf_logo_usa.png", link: "SurfDashboard.aspx", bg: "bg-lyca" },
   { name: "Boom", img: "../epay-logo/boom-mobile.png", link: "BoomDashboard.aspx", bg: "bg-boom" },

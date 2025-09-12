@@ -1,13 +1,10 @@
 import { ThemeToggleButton } from "../components/themes/ThemeToggleButton";
 import NotificationDropdown from "../components/themes/NotificationDropdown";
-import UserDropdown from "../components/themes/UserDropdown";
 import { useSidebar } from "../components/themes/SidebarContext";
-import Imagelogo from "../../public/logo/enk_logo.png";
-import Imagedarklogo from "../../public/logo/enk_logo.png";
 import {  Link } from "react-router-dom";
 import React, { useState ,useEffect,useRef} from "react";
 
-const AppHeader: React.FC = () => {
+export const AppHeader = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
 
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
@@ -41,7 +38,7 @@ const AppHeader: React.FC = () => {
   }, []);
 
   return (
-     <header className="sticky  flex w-full  h-10 z-99999 dark:border-gray-800 dark:bg-gray-900 border-gray-600  border-b">
+     <header className="fixed  flex w-full  h-10 z-99999 dark:border-gray-800 dark:bg-gray-900 border-gray-600  border-b   lg:sticky">
      <div className="flex px-2  items-center grow lg:flex-row ">
           <button
             className="items-center justify-center text-white w-5 h-5 pl-0.5 border-gray-200 rounded-lg z-99999 dark:border-gray-800 lg:flex dark:text-gray-400 lg:h-9"
