@@ -3,7 +3,7 @@
 header {
     box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.05);
 }
-header.sticky {
+header.fixed {
     /* background: #153d78; */
     background: #535252ba;
         border-radius: 0 10px 0 0;
