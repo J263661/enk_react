@@ -1,5 +1,6 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect } from "react";
+
+import React, { createContext, useContext, useState, useEffect, useMemo } from "react";
 
 type SidebarContextType = {
   isExpanded: boolean;
@@ -24,9 +25,7 @@ export const useSidebar = () => {
   return context;
 };
 
-export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -34,51 +33,44 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
+  // Resize handler
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (!mobile) {
-        setIsMobileOpen(false);
-      }
+      if (!mobile) setIsMobileOpen(false);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleSidebar = () => {
-    setIsExpanded((prev) => !prev);
-  };
+  // Toggle functions
+  const toggleSidebar = () => setIsExpanded(prev => !prev);
+  const toggleMobileSidebar = () => setIsMobileOpen(prev => !prev);
+  const toggleSubmenu = (item: string) => setOpenSubmenu(prev => (prev === item ? null : item));
 
-  const toggleMobileSidebar = () => {
-    setIsMobileOpen((prev) => !prev);
-  };
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    isExpanded: isMobile ? false : isExpanded,
+    isMobileOpen,
+    isHovered,
+    activeItem,
+    openSubmenu,
+    toggleSidebar,
+    toggleMobileSidebar,
+    setIsHovered,
+    setActiveItem,
+    toggleSubmenu,
+  }), [
+    isExpanded,
+    isMobileOpen,
+    isHovered,
+    activeItem,
+    openSubmenu,
+    isMobile
+  ]);
 
-  const toggleSubmenu = (item: string) => {
-    setOpenSubmenu((prev) => (prev === item ? null : item));
-  };
-
-  return (
-    <SidebarContext.Provider
-      value={{
-        isExpanded: isMobile ? false : isExpanded,
-        isMobileOpen,
-        isHovered,
-        activeItem,
-        openSubmenu,
-        toggleSidebar,
-        toggleMobileSidebar,
-        setIsHovered,
-        setActiveItem,
-        toggleSubmenu,
-      }}
-    >
-      {children}
-    </SidebarContext.Provider>
-  );
+  return <SidebarContext.Provider value={contextValue}>{children}</SidebarContext.Provider>;
 };

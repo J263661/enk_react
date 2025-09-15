@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
 import { TableColumn } from "react-data-table-component";
-import { Order, FieldValue } from "./types";
+import { Order, FieldValue } from "./Types";
 import { DatePickerInput } from "./DateRangePicker";
 import FilterForm from "./FiltersForm";
 import GetReportButton from "./GetReportButton";
 import ExportButton from "./ExportButton";
 import ReportTable from "./ReportTable";
 
-const ActivationLedgerReport: React.FC = () => {
+function ActivationLedgerReport() {
   // ---------------- State ----------------
   const [name, setName] = useState<FieldValue>("");
   const [level1, setLevel1] = useState<FieldValue>("");
@@ -18,7 +16,6 @@ const ActivationLedgerReport: React.FC = () => {
   const [orderType, setOrderType] = useState<FieldValue>("");
   const [status, setStatus] = useState<FieldValue>("");
 
-  // Default date range → Yesterday to Today
   const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
@@ -39,7 +36,11 @@ const ActivationLedgerReport: React.FC = () => {
     { name: "Order Type", selector: (row) => row.orderType, sortable: true },
     { name: "Status", selector: (row) => row.status, sortable: true },
     { name: "Quantity", selector: (row) => row.quantity.toString(), sortable: true },
-    { name: "Order Date", selector: (row) => format(row.orderDate, "yyyy-MM-dd"), sortable: true },
+    {
+      name: "Order Date",
+      selector: (row) => format(row.orderDate, "yyyy-MM-dd"),
+      sortable: true,
+    },
   ];
 
   // ---------------- API Call ----------------
@@ -48,7 +49,7 @@ const ActivationLedgerReport: React.FC = () => {
 
     setIsLoading(true);
     try {
-      // Prepare query params for API
+      // Build API params
       const params = {
         from: format(from, "yyyy-MM-dd"),
         to: format(to, "yyyy-MM-dd"),
@@ -58,11 +59,9 @@ const ActivationLedgerReport: React.FC = () => {
         orderType,
         status,
       };
-
       console.log("📡 API Filters:", params);
 
-
-      // Fake demo data
+      // Fake demo response
       const fakeData: Order[] = [
         {
           id: 1,
@@ -101,31 +100,6 @@ const ActivationLedgerReport: React.FC = () => {
     }
   }, [from, to, name, level1, level2, orderType, status]);
 
-  // ---------------- Export Handler ----------------
-  const handleExport = () => {
-    if (reportData.length === 0) return alert("No data to export!");
-
-    const worksheet = XLSX.utils.json_to_sheet(
-      reportData.map((row) => ({
-        ID: row.id,
-        Name: row.name,
-        "Level 1": row.level1,
-        "Level 2": row.level2,
-        "Order Type": row.orderType,
-        Status: row.status,
-        Quantity: row.quantity,
-        "Order Date": format(row.orderDate, "yyyy-MM-dd"),
-      }))
-    );
-
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
-    saveAs(data, `Activation_Report_${format(new Date(), "yyyyMMdd_HHmmss")}.xlsx`);
-  };
-
   // ---------------- Filtered Data ----------------
   const filteredData = reportData.filter((order) => {
     const values = [
@@ -143,10 +117,13 @@ const ActivationLedgerReport: React.FC = () => {
 
   // ---------------- UI ----------------
   return (
-    <div className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md text-gray-900 dark:text-gray-100">
-      <h2 className="text-lg font-semibold mb-4">Activation Ledger Report</h2>
+    <div className="p-2 bg-white dark:bg-gray-900 rounded-lg  text-gray-900 dark:text-gray-100 h-full">
+     <div className="panel_head">
+      <h2 className="text-lg font-semibold text-[#d2344a]">Activation Ledger Report</h2>
+      <h3 className="total_user"><span>Total : </span> <span>0</span></h3>
+      </div> 
 
-      {/* 🔹 Filters + Dates in One Grid */}
+      {/* Filters + Dates */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
         <FilterForm
           name={name}
@@ -161,16 +138,19 @@ const ActivationLedgerReport: React.FC = () => {
           setStatus={setStatus}
         />
 
-        {/* Date Range Pickers */}
         <DatePickerInput label="From Date" value={from} onChange={setFrom} />
         <DatePickerInput label="To Date" value={to} onChange={setTo} />
+          <div className="flex justify-end gap-2 mt-4">
+  <GetReportButton onClick={fetchReportData} loading={isLoading} />
+  <ExportButton data={reportData} fileName="Activation_Report" />
+</div>
       </div>
 
-      {/* 🔹 Buttons (kept separate for better responsive UI) */}
-      <div className="flex justify-end gap-2 mt-4">
-        <GetReportButton onClick={fetchReportData} />
-        {reportData.length > 0 && <ExportButton onClick={handleExport} />}
-      </div>
+      {/* Action Buttons */}
+    {/* <div className="flex justify-end gap-2 mt-4">
+  <GetReportButton onClick={fetchReportData} loading={isLoading} />
+  <ExportButton data={reportData} fileName="Activation_Report" />
+</div> */}
 
       {/* Report Table */}
       <div className="mt-6">
@@ -180,11 +160,11 @@ const ActivationLedgerReport: React.FC = () => {
           isLoading={isLoading}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-             className="dark:bg-gray-800 dark:text-gray-100"
+          className="dark:bg-gray-800 dark:text-gray-100"
         />
       </div>
     </div>
   );
-};
+}
 
 export default ActivationLedgerReport;

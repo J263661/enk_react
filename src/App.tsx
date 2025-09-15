@@ -25,18 +25,19 @@ const Layout = () => {
       {/* Main content */}
        
       <div
-        className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin} bg-gray-100 `}
-      >
+        className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin} bg-gray-100 `}>
+        <div className="left_bar">
       <AppSidebar />
+          </div>  
+    <div className="right_bar">
+       <AppHeader />
+            <div className="flex-1 p-2 md:p-1 mx-auto max-w-[var(--breakpoint-2xl)] bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 h-[91vh] transition-colors duration-300 ">
+               <AppRoutes /> 
+            </div>
+         <AppFooter />
 
-        <AppHeader />
- <div className="flex-1 p-2 md:p-1 mx-auto max-w-[var(--breakpoint-2xl)] bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 h-[91vh] transition-colors duration-300">
-      
-        <AppRoutes /> 
-        
-      </div>
-      <AppFooter />
-
+    </div>
+       
     </div>
 
      </div>
