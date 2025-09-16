@@ -245,3 +245,20 @@ span.input_icon {
 }
 
 }
+
+/* ------------------------reporting-components------------------------ */
+.panel_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #b9b9b9;
+    margin-bottom: 10px;
+}
+h3.total_user {
+    background: #00a63e;
+    padding: 0 4px;
+    border-radius: 5px;
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 14px;
+}
